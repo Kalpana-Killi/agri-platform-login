@@ -8,6 +8,8 @@ const LoginPage: React.FC = () => {
     password: '',
   });
 
+  const [isSubmitted, setIsSubmitted] = useState(false); // State to check if form is submitted
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -16,8 +18,16 @@ const LoginPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Login Details:', formData);
-    // Add logic to connect with the backend API
+    setIsSubmitted(true); // Mark as submitted
   };
+
+  if (isSubmitted) {
+    return (
+      <div className={styles.container}>
+        <h1 className={styles.successMessage}>You have successfully logged in!</h1>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
